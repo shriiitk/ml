@@ -105,32 +105,30 @@ def exploreData(df):
     print(df.columns)
     print("Dtypes:", df.dtypes)
     
-    ## Scatter plot to show all attribute relations
-    #pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(15, 15), diagonal="kde")
-    #pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(15, 15), diagonal="hist")
-    #plt.tight_layout()
-    #plt.show()
+    # Scatter plot to show all attribute relations
+    pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(10, 10), diagonal="kde")
+    pd.plotting.scatter_matrix(df, alpha=0.2, figsize=(10, 10), diagonal="hist")
+    plt.tight_layout()
+    plt.show()
     
-    ##Using seaborn to plot all charts to understand relation
-    #sns.set(style="ticks", color_codes=True)
-    ###sns.pairplot(data=df.dropna(), hue="Loan_Status", size=2.5 )
-    #print
-    #sns.lmplot("Credit_History", "CoapplicantIncome", data=df.dropna(), hue="Loan_Status", fit_reg=False)
-    #sns.lmplot("Credit_History", "LoanAmount", data=df.dropna(), hue="Loan_Status", fit_reg=False)
-    #sns.lmplot("Loan_Amount_Term", "LoanAmount", data=df.dropna(), hue="Loan_Status", fit_reg=False)
+    #Using seaborn to plot all charts to understand relation
+    sns.set(style="ticks", color_codes=True)
+    ##sns.pairplot(data=df.dropna(), hue="Loan_Status", size=2.5 )
+    print
+    sns.lmplot("Credit_History", "CoapplicantIncome", data=df.dropna(), hue="Loan_Status", fit_reg=False)
+    sns.lmplot("Credit_History", "LoanAmount", data=df.dropna(), hue="Loan_Status", fit_reg=False)
+    sns.lmplot("Loan_Amount_Term", "LoanAmount", data=df.dropna(), hue="Loan_Status", fit_reg=False)
     
-    #print(pd.crosstab(df.Education, df.Self_Employed))
-    #edu_empl = pd.crosstab(index=df.Education, columns=df.Self_Employed, margins=True)
-    #edu_empl.index = ['Graduate','Not Graduate']
-    #edu_empl.columns = ['Yes', 'No']
-    #print("edu_empl", edu_empl)
+    print(pd.crosstab(df.Education, df.Self_Employed))
+    edu_empl = pd.crosstab(index=df.Education, columns=df.Self_Employed, margins=True)
+    print("edu_empl", edu_empl)
     
-    #df[['Credit_History', 'Loan_Amount_Term', 'Loan_Status']].plot.bar(stacked=True)
-    #print("Training data size:",len(df)) #614
-    #print("Training data size without NaNs:",len(df.dropna())) #480
+    df[['Credit_History', 'Loan_Amount_Term', 'Loan_Status']].plot.bar(stacked=True)
+    print("Training data size:",len(df)) #614
+    print("Training data size without NaNs:",len(df.dropna())) #480
     
-    ## Plotting numeric columns to understand their ranges
-    #df[df.dtypes[(df.dtypes=="float64")|(df.dtypes=="int64")].index.values].hist(figsize=[11,11])
+    # Plotting numeric columns to understand their ranges
+    df[df.dtypes[(df.dtypes=="float64")|(df.dtypes=="int64")].index.values].hist(figsize=[11,11])
     return df
 
 def splitData(df, fraction):
@@ -310,7 +308,7 @@ def doPCA(X_train, X_test):
 ### START
 df = pd.read_csv('train_u6lujuX_CVtuZ9i.csv')
 ### Exploration
-#exploreData(df)
+exploreData(df)
 ### Pre processing starts
 df = preProcess(df)
 ### Pre processing for training data only
@@ -329,3 +327,12 @@ print("Best Params",svc_param_selection(X_train, y_train, 10))
 clf = getBestModel(X_train, X_test, y_train, y_test)
 ### Generating results for submission
 prepareTestPrediction(clf, 'test_Y3wMUE5_7gLdaTN.csv', pca)
+
+
+
+
+
+
+    
+
+
